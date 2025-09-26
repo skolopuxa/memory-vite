@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
     return {
-        base:"memory-vite",
+        // base:"memory-vite",
         plugins: [
             ViteImageOptimizer({
                 png: {
