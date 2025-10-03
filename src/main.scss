@@ -19,6 +19,7 @@ $w: 100px;
     @if (lightness($bg-color) < 30%) {
         color: white;
     }
+
     @else {
         color: rgb(28, 69, 71);
     }
@@ -65,6 +66,7 @@ p {
         background-color: adjust-color(rgb(28, 12, 114), $lightness: 90% / $i);
     }
 }
+
 /*верстка меню по BEM*/
 .menu {
     max-width: 1200px;
@@ -73,23 +75,89 @@ p {
     flex-direction: row;
     list-style: none;
     gap: 20px;
+
     &__item {
         color: rgb(255, 255, 255);
         text-transform: uppercase;
         text-decoration: none;
         transition: all 0.4s;
+
         &:hover {
             color: cadetblue;
         }
+
         &--active {
             font-weight: bold;
             color: cadetblue;
         }
-        @media(max-width: 900px){
+
+        @media(max-width: 900px) {
             font-size: 20px;
         }
     }
-    @media(max-width: 768px){
+
+    @media(max-width: 768px) {
         display: none;
     }
 }
+
+/*задание 3-4*/
+
+$bg-btn: rgb(122, 226, 25);
+$color-btn: rgb(67, 100, 192);
+$font-size-btn: 20px;
+$radius-btn: 10px;
+.auth__btn--login {
+    background-color: $bg-btn;
+    color: $color-btn;
+    font-size: $font-size-btn;
+    border-radius: $radius-btn;
+    padding-left: $font-size-btn*0.5;
+    padding-right: $font-size-btn*0.5;
+}
+.auth__btn--reg {
+    background-color: adjust-color($bg_btn,$hue:180deg, $lightness: -50%);
+}
+ /*задание 5*/
+ .auth {
+    max-width: 250px;
+    background-color: adjust-color($bg_btn,$lightness:40%);
+    padding: 20px;
+
+    &__value {
+        border-radius: $radius-btn;
+    }
+    &__btn{
+        border: none;
+        transition: all 0.3s;
+        
+        &--login{
+            color: $color-btn;
+            background: $bg-btn;
+        }
+        &--reg{
+            color: adjust-color($bg_btn,$lightness:20%);
+            background: adjust-color($bg_btn,$blackness:20%);
+        }
+        &:hover {
+            color: rgb(145, 29, 240);
+        }
+    }
+    div {
+        padding-top: 10px;
+    }
+    div:first-child{
+        padding-top: 0;
+    }
+ }
+
+ /*задание 6*/
+ @mixin set-size($font-size:16px) {
+    font-size: $font-size;
+    padding: $font-size*0.5 $font-size*0.3;
+ }
+ input {
+    border-radius: $radius-btn;
+    border: none;
+    @include set-size($font-size-btn);
+ }
