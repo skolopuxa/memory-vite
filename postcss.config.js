@@ -1,9 +1,7 @@
-import autoprefixer from "autoprefixer";
-
 export default {
-    plugin: {
+      plugins: {
         autoprefixer: {
-            overrideBrowserslist:['>0.1%', 'last 2 versions', 'not dead']
-        }
-    }
-}
+          overrideBrowserslist: ['> 0.1%', 'last 2 versions', 'not dead'],
+        },
+      },
+    };

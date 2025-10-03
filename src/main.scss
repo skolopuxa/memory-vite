@@ -1,12 +1,13 @@
-$bg-color: red;
+$bg-color: rgb(214, 6, 6);
 $w: 100px;
 
 @mixin main-font {
-    color:chartreuse;
+    @include set-color-text();
     font-size: 20px;
     line-height: 28px;
 }
-@mixin paddings($value, $border-color:black){
+
+@mixin paddings($value, $border-color: black) {
     border: 1px solid $border-color;
     padding-top: $value*2;
     padding-bottom: $value*3;
@@ -14,8 +15,18 @@ $w: 100px;
     padding-right: $value;
 }
 
+@mixin set-color-text {
+    @if (lightness($bg-color) < 30%) {
+        color: white;
+    }
+    @else {
+        color: rgb(28, 69, 71);
+    }
+}
+
 body {
     background-color: $bg-color;
+    @include set-color-text();
 }
 
 .block {
@@ -24,21 +35,61 @@ body {
     padding: $w - 50px;
     border: $w*0.1 solid rgb(174, 77, 230);
     background-color: adjust-color(rgb(10, 182, 235), $red: 50%);
+
     img {
-    width: 100% - 10%;
-}
-p {
-    color: adjust-color(rgb(99, 75, 238), $lightness: -20%);
-    .bold {
-        font-weight: bold;
+        width: 100% - 10%;
     }
-    &:last-child {
-        font-style: italic;
+
+    p {
+        color: adjust-color(rgb(99, 75, 238), $lightness: -20%);
+
+        .bold {
+            font-weight: bold;
+        }
+
+        &:last-child {
+            font-style: italic;
+        }
     }
-}
 }
 
 p {
     @include main-font;
     @include paddings(20px, blue);
+}
+
+@for $i from 1 to 5 {
+    .item-#{$i} {
+        width: 90%;
+        height: 50px;
+        background-color: adjust-color(rgb(28, 12, 114), $lightness: 90% / $i);
+    }
+}
+/*верстка меню по BEM*/
+.menu {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 20px;
+    &__item {
+        color: rgb(255, 255, 255);
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: all 0.4s;
+        &:hover {
+            color: cadetblue;
+        }
+        &--active {
+            font-weight: bold;
+            color: cadetblue;
+        }
+        @media(max-width: 900px){
+            font-size: 20px;
+        }
+    }
+    @media(max-width: 768px){
+        display: none;
+    }
 }
